@@ -1,0 +1,142 @@
+{% extends 'layout.twig' %}
+
+{% block head %}
+  {{ parent() }}
+{% endblock %}
+
+{% block body %}
+  <div class="container-fluid p-2">
+    <input class="txt-selected" type="hidden"/>
+    <div class="card card-default">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-6">
+            <h1 class="h4 p-2 mb-0">{{ trans('nerd.jobs') }}
+              {{ trans('nerd.list') }}</h1>
+          </div>
+          <div class="col-lg text-right toolbar">
+            <div id="toolbar" class="pt-2" role="toolbar">
+              <div class="btn-group">
+                <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#mdl-add">
+                  <span class="fa fa-plus-square fa-fw fa-lg"></span>
+                  {{ trans('nerd.add') }}
+                </button>
+                <button type="button" class="btn btn-default btn-sm item-selected navigate" data-navigate="" disabled="disabled">
+                  <span class="fa fa-edit fa-fw fa-lg" aria-hidden="false"></span>
+                  {{ trans('nerd.edit') }}
+                </button>
+                <button type="button" class="btn btn-default btn-sm item-selected" data-toggle="modal" data-target="#mdl-remove" disabled="disabled">
+                  <span class="fa fa-trash fa-fw fa-lg" aria-hidden="true"></span>
+                  {{ trans('nerd.delete') }}
+                </button>
+              </div>
+              <div class="btn-group">
+                <!--<button id="btn-scedule" class="btn btn-default btn-sm no-mob item-sel" data-toggle="modal" data-target="#dlg-schedule" disabled="disabled"> <span class="fa fa-calendar-plus-o fa-fw fa-lg" aria-hidden="true"></span> <span
+                class="caption">Schedule</span> </button>-->
+                <button type="button" class="btn btn-default btn-sm item-selected navigate" data-navigate="training" disabled="disabled">
+                  <span class="fa fa-subway fa-fw fa-lg" aria-hidden="true"></span>
+                  {{ trans('nerd.train') }}
+                </button>
+                <button type="button" class="btn btn-default btn-sm item-selected navigate" data-navigate="results" disabled="disabled">
+                  <span class="fa fa-table fa-fw fa-lg" aria-hidden="true"></span>
+                  {{ trans('nerd.results') }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body p-0" style="min-height: 62vh">
+        <table class="table" style="width: 100%;">
+          <thead>
+            <tr>
+              <th>{{ trans('nerd.title') }}</th>
+              <th>{{ trans('nerd.desc') }}</th>
+              <th>{{ trans('nerd.count') }}</th>
+              <!-- Schedule <th><span class="fa fa-calendar fa-fw" aria-hidden="true"></span></th>-->
+              <th>{{ trans('nerd.status') }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in jobs %}
+              <tr data-id="{{row.id}}" data-cron="{{row.cron}}">
+                <td>{{row.title}}</td>
+                <td>
+                  {% if row.description | length > 0 %}
+                    <p>{{row.description}}</p>
+                  {% endif %}
+                  {% if row.link_id > 0 %}
+                    <a href="/jobs/{{row.id}}/training/?link={{row.link_id}}">
+                      {{row.url}}
+                    </a>
+                  {% endif %}
+                </td>
+                <td class="w-25">
+                  <span class="fa fa-sm fa-link">{{row.link_count}}</span>
+                  <span class="fa fa-sm fa-tag pl-2">{{row.labels}}</span>
+                </td>
+                <!--<td class="schedule" title="Next or Last Run was: row.cron | cronNext "> row.cron | cronNext </td>-->
+                <td class="status">
+                  <p>
+                    {% if row.status == 0 %}
+                      <span class="fas fa-globe-americas fa-fw fa-lg" title="Crawl"></span>
+                      {{ trans('nerd.crawl') }}
+                    {% elseif row.status == 1 %}
+                      <span class="fa fa-cubes fa-fw fa-lg" title="Build"></span>
+                      {{ trans('nerd.model') }}
+                    {% elseif row.status == 2 %}
+                      <span class="fas fa-tag fa-fw fa-lg" title="Tag"></span>
+                      {{ trans('nerd.tag') }}
+                    {% elseif row.status == 3 %}
+                      <span class="fa fa-table fa-fw fa-lg" title="Result"></span>
+                      {{ trans('nerd.result') }}
+                    {% elseif row.status == 4 %}
+                      <span class="fa fa fa-map-marker fa-fw fa-lg" title="Locate"></span>
+                      {{ trans('nerd.locate') }}
+                    {% endif %}
+                  </p>
+                </td>
+              </tr>
+
+            {% endfor %}
+
+          </tbody>
+        </table>
+        <!--<div id="menu-context" data-toggle="context" data-target="#menu-context"> <ul class="dropdown-menu" role="menu"> <li> <a tabindex="-1"> <span class="fa fa-subway" aria-hidden="true"></span> {{ trans('nerd.training') }}</a> </li> <li> <a
+        tabindex="-1"> <span class="fa fa-play-circle-o"></span> {{ trans('nerd.run') }} </a> </li> <li> <a tabindex="-1"> <span class="fa fa-table"></span> {{ trans('nerd.results') }} </a> </li> </ul> </div>-->
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-lg-7 col-md-8">
+            {% block alert %}
+              {% include 'App/alert.twig' %}
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% include 'Jobs/add.twig' %}
+  {% include 'Jobs/remove.twig' %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-1">
+      <a href="https://opennlp.apache.org" title="Apache OpenNLP">
+        <img src="/assets/img/opennlp-poweredby.svg" alt="Apache OpenNLP" style="width: 100%">
+      </a>
+    </div>
+    <div class="col-md-11 text-right">
+      <a href="{{settings.repo}}" title="Source Repository">
+        <small class="text-muted">Version:
+          {{version}}</small>
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+{{ parent() }}
+<!--<script src="/assets/js/vendor/cron-picker.js"></script>-->
+<script src="/assets/js/jobs{{settings.mode == 'dev' ? '' : '.min'}}.js"></script>
+{% endblock %}

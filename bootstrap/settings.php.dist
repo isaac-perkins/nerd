@@ -1,0 +1,112 @@
+<?php
+use Monolog\Logger as Logger;
+
+return [
+
+  'settings' => [
+
+    /* Slim settings */
+    'displayErrorDetails' => true,
+    'determineRouteBeforeAppMiddleware' => true,
+
+    /* Next Invite Code */
+    'invite' => '99e914bc-6d59-AG78-238c-2462ss1e6bce',
+
+    //i18N
+    'locale' => 'en',
+
+    // Source Code Repository
+    'repo' => 'https://github.com/Boulevard-Software/n.e.r.d',
+
+    /* Twig settings */
+    'view' => [
+        'template_path' => __DIR__ . '/../http/Resources/views',
+        'twig' => [
+            'cache' => false, //__DIR__ . '/../cache/twig'
+            'debug' => true,
+            'auto_reload' => true
+        ]
+    ],
+
+    /* Google */
+    'google' => [
+      'maps' => [
+        'key' => '',
+        'ip_restricted' => '',
+        'requestUrl' => [
+            'json' => 'https://maps.googleapis.com/maps/api/geocode/json?',
+            'xml'  => 'https://maps.googleapis.com/maps/api/geocode/xml?'
+        ],
+        'defaults' => [
+          'lat' => 37.7541145,
+          'lng' => -122.4177917
+        ]
+      ],
+      'recaptcha' => [
+        'key' => '',
+        'secret' => ''
+      ]
+    ],
+
+    /* Apache OpenNLP */
+    'opennlp' => [
+      'path' => __DIR__ . '/../bin/apache/opennlp/bin/',
+    ],
+
+    /* Apache Solr */``
+    'solr' => [
+      'url'  =>  'http://127.0.0.1:8983/solr/',
+      'core' => 'core_name',
+      'usr' => 'solr',
+      'pwd'  => 'password',
+      'config' => [
+        'export' => 'replace', // 'update' => anything else = replace
+        'import' => [
+          'columns' => [       //match csv columns for import to solr
+            'ID',
+            'Address',
+            'Permit',
+            'Owner',
+            'City Status',
+            'Outcome',
+            'Document City',
+            'Document Source',
+            'Document Date',
+            'Description'
+          ]
+        ]
+      ]
+    ],
+
+    /* Monolog */
+    'monolog' => [
+      'service' => [
+        'path' => __DIR__ . '/../cache/nerd.log',
+        'level' => Logger::DEBUG
+      ]
+    ],
+
+    /* Support */
+    'support' => [
+      'trello' => [
+        'board' => 'https://trello.com/code/boardname',
+        'key' => 'your_trello_api_key'
+      ]
+    ],
+    ,
+    //Email
+    'email' => [
+      'sender' => [
+        'email' => 'someone@somewhere.com',
+        'name' => 'Somebody Name'
+      ],
+      'server' => [
+        'host'      => 'pop.mailserver.com',
+        'port'      => '25',
+        'username'  => 'yourserverusername',
+        'password'  => 'yourserverpassword',
+        'protocol'  => 'TLS'   // SSL or TLS
+      ]
+    ]
+  ]
+];

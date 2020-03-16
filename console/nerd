@@ -1,0 +1,55 @@
+#! /usr/bin/env php
+<?php
+namespace Console;
+
+use Commando\Command;
+use Symfony\Component\Yaml\Yaml;
+use Illuminate\Database\Capsule\Manager;
+use Nerd\Model\Command as Nerd;
+
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$cmd = new Command();
+$cmd->argument()
+->aka('action')
+->describedAs('Specify action to perform: install , upgrade')
+->require(true)
+->must(function($action) {
+   return in_array($action, ['user', 'install', 'upgrade', 'model', 'crawl', 'tag', 'result', 'locate', 'job']);
+});
+
+$cmd->option('j')
+->aka('job')
+->describedAs('Job ID')
+->require(false)
+->must(function($jobID) {
+  return is_numeric($jobID);
+});
+
+
+$cmd->option('a')
+->aka('add')
+->describedAs('Add user.')
+->require(false)
+->default(false);
+
+
+require __DIR__ . '/../bootstrap/database.php';
+
+if (in_array($cmd['action'],['install', 'upgrade', 'user'])) {
+
+    require __DIR__ . '/../bootstrap/database/' . $cmd['action'] . '.php';
+
+} else {
+
+    if (!$cmd['job']) {
+      echo PHP_EOL . 'No job id entered' . PHP_EOL;
+      exit;
+    }
+    $rv = (Nerd::process(1, $cmd['action'], $cmd['job']));
+    echo PHP_EOL;
+    print_r($rv[0]);
+    echo PHP_EOL;
+}
+
+echo PHP_EOL . ucFirst($cmd['action']) . ' processed!' . PHP_EOL . PHP_EOL;

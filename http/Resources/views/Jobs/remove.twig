@@ -1,0 +1,30 @@
+<div id="mdl-remove" class="modal" tabindex="-1" role="dialog">
+  <form method="delete" action="/jobs/list" data-callback="responseRemove">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ trans('nerd.delete') }} {{ trans('nerd.job') }}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="title">{{ trans('nerd.job') }}</label>
+            <input type="text" class="form-control" id="txt-title" name="title" placeholder="{{ trans('nerd.delete') }} {{ trans('nerd.job') }}">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+            {{ trans('nerd.cancel') }}
+          </button>
+          <button type="submit" class="btn btn-primary">
+            <span class="fa fa-trash"></span>
+            {{ trans('nerd.delete') }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo "nerd setup"
+read user
+echo "Adding $user as file owner."
+#composer update
+#cd console
+#composer update
+#cd ..
+chown -R $user:www-data *
+chmod -R 755 *
+chmod -R 775 cache
+chmod -R 775 data
+chmod -R +x console/bin/*
+chmod -R +x console/nerd
+chmod -R 775 http/Resources/views/Emails
+
+cp bootstrap/parameters.yml.dist bootstrap/parameters.yml
+cp bootstrap/settings.php.dist bootstrap/settings.php
+
+echo "complete. "

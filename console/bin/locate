@@ -1,0 +1,17 @@
+#! /usr/bin/env php
+<?php
+namespace Console;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$addressCode = 'c';
+
+include_once(__DIR__ . '/../lib/common.php');
+
+$log = log_job_start('locate', $jobID, $jobDir, $echo);
+
+$locate = new Model\Locate($job, $log);
+
+$locate->go($cmd['code']);
+
+log_job_end($log, 'results', $jobID, $echo);

@@ -1,0 +1,137 @@
+{% extends 'layout.twig' %}
+
+{% block head %}
+  {{ parent() }}
+{% endblock %}
+
+{% block body %}
+  <div class="container-fluid p-2">
+    <div class="card card-default">
+      <div class="card-header">
+        <h4 class="p-2 mb-0">{{ trans('nerd.edit') }} {{ trans('nerd.job') }}</h4>
+      </div>
+      <div class="card-body card-content">
+        <form id="frm-jobs-edit">
+          <div class="row">
+            <div class="col-lg-6 col-md-8 col-sm-12 side">
+              <div class="card card-default">
+                <div class="card-header">
+                  <h5 class="p-2 mb-0">Details</h5>
+                </div>
+                <div class="card-body ">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label for="title">{{ trans('nerd.title') }}</label>
+                        <input type="text" class="form-control" id="title" name="title" placeholder="{{ trans('nerd.title') }}" value="{{job.title}}">
+                      </div>
+                      <div class="form-group">
+                        <label for="desc">{{ trans('nerd.desc') }}</label>
+                        <input type="text" class="form-control" id="desc" name="description" placeholder="{{ trans('nerd.desc') }}" value="{{job.description}}">
+                      </div>
+                      <div class="form-group clr">
+                        <div class="row">
+                          <div class="col-sm-8">
+                            <label for="btn-clear">{{ trans('nerd.clear') }} {{ trans('nerd.data') }}</label>
+                          </div>
+                          <div class="col-sm-4 text-right">
+                            <button id="btn-clear" type="button" class="btn btn-default btn-sm">
+                              <span class="fa fa-trash fa-fw fa-lg" aria-hidden="true"></span>
+                              {{ trans('nerd.clear') }}
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-8">
+                      <label>{{ trans('nerd.multiple_items_per_document') }} (<i>{{ trans('nerd.id_seperated') }}</i>)</label>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group text-right">
+                        <div class="checkbox">
+                          <label class="btn btn-default btn-sm">
+                            <input type="checkbox" data-text="txt-multiple-items" name="multi" checked="checked">
+                            <span class="fa fa-ok"></span>
+                            {{ trans('nerd.multi') }}
+                          </label>
+                        </div>
+                        <input id="txt-multiple-items"  type="hidden">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-8">
+                      <label>{{ trans('nerd.id') }}</label>
+                      <div class="form-group">
+                        <input type="text" id="txt-xpath" class="form-control inputbox d-none" placeholder="{{ trans('nerd.document.id.xpath') }}" >
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group text-right">
+                        <div class="checkbox">
+                          <label>
+                            <input type="radio" checked="checked">
+                            {{ trans('nerd.content') }}
+                          </label>
+                          <label>
+                            <input type="radio">
+                            {{ trans('nerd.xpath') }}
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12 d-none" id="div-xpath">
+                      <label>{{ trans('nerd.id') }} {{ trans('nerd.xpath') }}</label>
+                      <div class="form-group">
+                        <input type="text" id="txt-content-xpath" name="xpath" class="form-control inputbox" placeholder="{{ trans('nerd.additional') }} {{ trans('nerd.content') }} {{ trans('nerd.xpath') }}">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-8 col-sm-12 side">
+              <div class="card card-default">
+                <div class="card-header">
+                  <h5 class="p-2 mb-0">{{ trans('nerd.crawl') }}</h5>
+                </div>
+                <div class="card-body">
+                  {% include 'Jobs/crawl.twig' %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-lg-6 col-md-8 col-sm-8">
+              {% block alert %}
+                {% include 'App/alert.twig' %}
+              {% endblock %}
+            </div>
+            <div class="col-lg-6 col-md-8 col-sm-4 text-right">
+              <button id="btn-back" class="btn btn-default btn-sm btn-back" type="button">
+                <span class="fa fa-times fa-fw fa-lg" aria-hidden="true"></span>
+                {{ trans('nerd.back') }}
+              </button>
+              <button id="btn-edit-job" type="button" class="btn btn-primary btn-sm btn-submit">
+                <span class="fa fa-save fa-fw fa-lg" aria-hidden="true"></span>
+                {{ trans('nerd.edit') }}
+              </button>
+            </div>
+          </div>
+        </div>
+        <input id="txt-job" type="hidden" value="{{job.id}}"/>
+      </form>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascript %}
+  {{ parent() }}
+  <script src="/assets/js/job-edit{{settings.mode == 'dev' ? '' : '.min'}}.js"></script>
+{% endblock %}

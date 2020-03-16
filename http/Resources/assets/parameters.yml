@@ -1,0 +1,9 @@
+parameters:
+    driver: pgsql
+    host: localhost
+    database: ccd
+    username: postgres
+    password: 'Z1ggy1'
+    charset: utf8
+    collation: utf8_general_ci
+    prefix: ''

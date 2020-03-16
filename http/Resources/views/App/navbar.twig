@@ -1,0 +1,79 @@
+{% if auth.check() %}
+
+  <ul class="navbar-nav bg-gradient-nerd sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+      <div class="sidebar-brand-icon rotate-n-15">
+        <i class="fas fa-glasses"></i>
+      </div>
+      <div class="sidebar-brand-text mx-3">
+        <p style="padding:0;margin:0">Nerd</p>
+        <p style="padding:0;margin:0; font-size: 6px;">Named Entity Recognition Dashboard</p>
+      </div>
+    </a>
+
+    <hr class="sidebar-divider my-0">
+
+    <li class="nav-item active">
+      <a class="nav-link nav-jobs" href="/jobs/list/">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>{{ trans('nerd.jobs') }} </span>
+      </a>
+    </li>
+
+    <hr class="sidebar-divider my-0">
+
+    {% if settings.solr.url %}
+
+      <li class="nav-item">
+        <a class="nav-link nav-solr" href="/solr/">
+          <span class="pt-5">Solr</span>
+        </a>
+      </li>
+
+      <hr class="sidebar-divider d-none d-md-block">
+
+    {% endif %}
+
+    <li class="nav-item">
+      <a class="nav-link nav-settings collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-fw fa-cogs"></i>
+        <span>{{ trans('nerd.settings') }}</span>
+      </a>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">{{ trans('nerd.settings') }}:</h6>
+          <a class="collapse-item" href="/annotations/">{{ trans('nerd.annotations') }}</a>
+          <a class="collapse-item" href="/users/">{{ trans('nerd.users') }}</a>
+          <a class="collapse-item" href="/config/">{{ trans('nerd.config') }}</a>
+          <a class="collapse-item" href="/templates/">{{ trans('nerd.templates') }}</a>
+        </div>
+      </div>
+    </li>
+
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <li class="nav-item">
+      <a class="nav-link nav-wiki" href="/wiki/">
+        <i class="fab fa-wikipedia-w"></i>
+        <span>Wiki</span></a>
+    </li>
+
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <li class="nav-item">
+      <a class="nav-link" href="{{settings.trello.board}}" target="_blank">
+        <i class="fab fa-trello"></i>
+        <span>Trello</span>
+      </a>
+    </li>
+
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+      <br/> <br/> <br/> <br/> <br/>
+      <button class="rounded-circle border-0 mt-3" id="sidebarToggle"></button>
+    </div>
+  </ul>
+{% endif %}

@@ -1,0 +1,34 @@
+#! /usr/bin/env php
+<?php
+namespace Console;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+use Psr\Http\Message\UriInterface;
+use Spatie\Crawler\Crawler;
+use Nerd\Model\Log;
+
+include_once(__DIR__ . '/../lib/common.php');
+
+$log = log_job_start('crawl', $jobID, $jobDir, $echo);
+
+$base = $job->getBase();
+
+foreach($base as $url) {
+  try {
+    Crawler::create($job->getConfig())
+      ->setCrawlObserver(new Model\Observer($job, $log, $echo))
+      ->setCrawlProfile(new Model\Profile($job, $log))
+      ->startCrawling($url['uri']);
+
+  } catch(\Exception $e) {
+
+    if ($echo == true) {
+      echo "Error: " . $e->getMessage();
+    }
+
+    $log->error($e->getMessage());
+  }
+}
+
+log_job_end($log, 'results', $jobID, $echo);

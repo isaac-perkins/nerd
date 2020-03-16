@@ -1,0 +1,33 @@
+{
+  "title": "",
+  "multi": "1",
+  "xpath": "",
+  "base": {
+    "urls": [
+      {
+        "uri": "",
+
+        "filters": [
+
+        ],
+        "cookies": [
+
+        ]
+      }
+    ]
+  },
+  "documents": {
+    "urls": [
+      {
+        "uri": "",
+
+        "filters": [
+
+        ],
+        "cookies": [
+
+        ]
+      }
+    ]
+  }
+}

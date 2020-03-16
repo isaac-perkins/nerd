@@ -1,0 +1,111 @@
+{% extends 'layout.twig' %}
+{% block head %}
+  {{ parent() }}
+  <link href="/assets/css/vendor/bootstrap-select.min.css" rel="stylesheet">
+{% endblock %}
+{% block body %}
+  <div class="container-fluid p-2">
+      <input class="txt-selected" type="hidden"/>
+    <div class="card card-default">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-6">
+            <h1 class="h4 p-2 mb-0">{{ trans('nerd.manage') }} {{ trans('nerd.annotations') }}</h1>
+          </div>
+          <div class="col-lg text-right">
+            <div id="toolbar" class="pt-2">
+              <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#mdl-annotation-add">
+                  <span class="fa fa-plus-square fa-fw fa-lg"></span>
+                </button>
+                <form action="/annotations" method="delete" data-callback="responseRemove">
+                  <button type="submit" class="btn btn-default no-mob btn-sm item-selected" disabled="disabled">
+                    <span class="fa fa-trash fa-fw fa-lg" aria-hidden="true"></span>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body p-0">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>{{ trans('nerd.title') }}</th>
+              <th>{{ trans('nerd.name') }}</th>
+              <th>{{ trans('nerd.multi') }}</th>
+              <th>{{ trans('nerd.type') }}</th>
+              <th>{{ trans('nerd.order') }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in annotations %}
+              <tr data-id="{{row.id}}" >
+                <td>
+                  {{ row.title }}
+                </td>
+                <td>
+                  {{ row.name }}
+                </td>
+                <td>
+                  {% if row.multi == 1 %}
+                    {{ trans('nerd.yes') }}
+                  {% else %}
+                    {{ trans('nerd.no') }}
+                  {% endif %}
+                </td>
+                <td>
+                    {% if row.type == 1 %}
+                      Text
+                    {% endif %}
+                    {% if row.type == 2 %}
+                      Number
+                    {% endif %}
+                    {% if row.type == 3 %}
+                      Date
+                    {% endif %}
+                </td>
+                <td>
+                  <input type="text" class="form-control txt-order" value="{{ row.order }}" style="width: 40px" disabled>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-md-7">
+            {% block alert %}
+              {% include 'App/alert.twig' %}
+            {% endblock %}
+          </div>
+          <div class="col-md-5 text-right">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#mdl-annotation-add">
+                <span class="fa fa-plus-square fa-fw fa-lg"></span>
+                {{ trans('nerd.add') }}
+              </button>
+              <form action="/annotations" method="delete" data-callback="responseRemove">
+                <button type="submit" class="btn btn-default no-mob btn-sm item-selected" disabled="disabled" >
+                  <span class="fa fa-trash fa-fw fa-lg" aria-hidden="true"></span>
+                </button>
+              </form>
+              <button type="button" class="btn btn-primary btn-sm btn-back">
+                <span class="fa fa-times sfa-fw fa-lg" aria-hidden="true"></span>
+                {{ trans('nerd.back') }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% include 'Annotation/add.twig' %}
+{% endblock %}
+{% block javascript %}
+  {{ parent() }}
+  <script src="/assets/js/vendor/bootstrap-select.min.js"></script>
+  <script src="/assets/js/annotations{{settings.mode == 'dev' ? '' : '.min'}}.js"></script>
+{% endblock %}

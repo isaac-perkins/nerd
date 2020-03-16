@@ -1,0 +1,41 @@
+<div id="mdl-add" class="modal" role="dialog">
+  <form action="/jobs/{{job_id}}/training" method="put" data-callback="responseNew">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ trans('nerd.fetch') }} {{ trans('nerd.training') }}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="lbl-url">
+                <span class="fa fa-globe-americas"></span>
+              </span>
+            </div>
+            <input id="txt-training-add" name="url" type="text" class="form-control" placeholder="{{trans('nerd.url')}}" aria-label="Url" aria-describedby="lbl-url">
+          </div>
+          <div class="checkbox">
+            <label class="btn btn-default btn-sm">
+              <input name="new" type="checkbox" data-text="txt-add" checked="checked">
+              <span class="fa fa-plus-square"></span>
+              {{trans('nerd.add_as_new')}}
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+            {{trans('nerd.cancel')}}
+          </button>
+          <button type="submit" class="btn btn-primary">
+            <span class="fa fa-download"></span>
+            {{trans('nerd.fetch')}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

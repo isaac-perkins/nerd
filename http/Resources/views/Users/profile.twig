@@ -1,0 +1,111 @@
+{% extends 'layout.twig' %}
+{% block head %}
+  {{ parent() }}
+{% endblock %}
+{% block body %}
+  <div class="container-fluid p-2">
+    <form method="post" action="/profile" data-href="/jobs/list">
+      <div class="card card-default">
+        <div class="card-header">
+          <h4 class="h4 p-2 mb-0">{{ trans('nerd.profile') }}</h4>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="card card-default">
+                <div class="card-header p-2">
+                  <h5 class="pt-2 mb-0">Profile</h5>
+                </div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="txt-title">{{ trans('nerd.username') }}</label>
+                    <input type="text" id="txt-title" class="form-control" name="title" placeholder="{{ trans('nerd.username') }}" value="{{user.username}}" readonly>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="txt-fname">{{ trans('nerd.fname') }}</label>
+                        <input type="text" id="txt-fname" class="form-control" name="fname" placeholder="{{ trans('nerd.fname') }}" value="{{user.first_name}}">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="txt-lname">{{ trans('nerd.lname') }}</label>
+                        <input type="text" id="txt-lname" class="form-control" name="lname" placeholder="{{ trans('nerd.lname') }}" value="{{user.last_name}}">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="txt-email">{{ trans('nerd.email') }}</label>
+                    <input type="text" id="txt-email" class="form-control" name="email" placeholder="{{ trans('nerd.email') }}" value="{{user.email}}">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="card card-default">
+                <div class="card-header p-2">
+                  <h5 class="pt-2 mb-0">Password</h5>
+                </div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="txt-old-password">
+                      {{ trans('nerd.old') }}
+                      {{ trans('nerd.password') }}
+                    </label>
+                    <input type="text" id="txt-old-password" class="form-control" name="old_password" placeholder="{{ trans('nerd.old') }} {{ trans('nerd.password') }}">
+                  </div>
+                  <div class="form-group">
+                    <label for="txt-new-password">
+                      {{ trans('nerd.new') }}
+                      {{ trans('nerd.password') }}
+                    </label>
+                    <input type="text" id="txt-new-password" class="form-control" name="new_password" placeholder="{{ trans('nerd.new') }} {{ trans('nerd.password') }}">
+                  </div>
+                  <div class="form-group">
+                    <label for="txt-confirm-password">
+                      {{ trans('nerd.confirm') }}
+                      {{ trans('nerd.password') }}
+                    </label>
+                    <input type="text" id="txt-confirm-password" class="form-control" name="confirm_password" placeholder="{{ trans('nerd.confirm') }} {{ trans('nerd.password') }}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="row">
+                <div class="col-lg-7 col-md-8 col-sm-8 foot-wrap">
+                  {% block alert %}
+                    {% include 'App/alert.twig' %}
+                  {% endblock %}
+                </div>
+                <div class="col-lg-5 col-md-4 col-sm-4 text-right foot-btns">
+                  <button class="btn btn-default btn-sm btn-back" type="button">
+                    <span class="fa fa-times  fa-fw fa-lg" aria-hidden="true"></span>
+                    {{ trans('nerd.back') }}
+                  </button>
+                  <button class="btn btn-primary btn-sm" type="submit">
+                    <span class="fa fa-save  fa-fw fa-lg" aria-hidden="true"></span>
+                    {{ trans('nerd.save') }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+{% endblock %}
+{% block javascript %}
+  {{ parent() }}
+  <script>
+    $(document).ready(function() {
+      selectNavItem('settings');
+    });
+  </script>
+{% endblock %}

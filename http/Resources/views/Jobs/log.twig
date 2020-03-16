@@ -1,0 +1,75 @@
+{% extends 'layout.twig' %}
+
+{% block head %}
+  {{ parent() }}
+  <link href="/assets/css/jobs.css" rel="stylesheet">
+  <script src="/assets/js/vendor/codemirror.js"></script>
+  <link href="/assets/css/vendor/codemirror.css" rel="stylesheet"></link>
+  <script src="/assets/js/vendor/xml.js"></script>
+{% endblock %}
+
+{% block body %}
+  <div class="container-fluid p-2">
+    <div class="card card-default">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-7" style="overflow: hidden;">
+            <h4 class="h4 p-2 mb-0">{{ trans('nerd.log') }}</h4>
+          </div>
+          <div class="col-md-5 text-right pt-2">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default btn-sm">{{ trans('nerd.log') }}</button>
+              <button type="button" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="log/?log=crawl">
+                  <span class="fas fa-globe-americas"></span>
+                  {{ trans('nerd.crawl') }}
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="log/?log=model">
+                  <span class="fa fa-cubes fa-fw fa-lg" aria-hidden="true"></span>
+                  {{ trans('nerd.build') }}
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="log/?log=tag">
+                  <span class="fas fa-tag  fa-fw fa-lg"></span>
+                  {{ trans('nerd.tag') }}
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="log/?log=result">
+                  <span class="fa fa-table fa-fw fa-lg"></span>
+                  {{ trans('nerd.results') }}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body" style="height: 66vh">
+        <textarea id="txt-content">{{ log|raw }}</textarea>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-md-5">
+            {% block alert %}
+              {% include 'App/alert.twig' %}
+            {% endblock %}
+          </div>
+          <div class="col-md-7 text-right">
+            <button class="btn btn-primary btn-sm mt-2 btn-back" type="button">
+              <span class="fa fa-times  fa-fw fa-lg" aria-hidden="true"></span>
+              {{ trans('nerd.back') }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascript %}
+  {{ parent() }}
+  <script src="/assets/js/logs{{settings.mode == 'dev' ? '' : '.min'}}.js"></script>
+{% endblock %}

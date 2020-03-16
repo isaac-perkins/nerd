@@ -1,0 +1,169 @@
+<ul class="nav nav-tabs" id="tab-crawl" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="lbl-index" data-toggle="tab" href="#tab-index" role="tab" aria-controls="index" aria-selected="true">
+      {{ trans('nerd.index') }}
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="lbl-tab" data-toggle="tab" href="#tab-documents" role="tab" aria-controls="tab-documents" aria-selected="false">
+      {{ trans('nerd.documents') }}
+    </a>
+  </li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane fade show active" id="tab-index" role="tabpanel" aria-labelledby="lbl-index" data-bd="base">
+    <div class="form-group m-2" data-fg="url">
+      <div class="row">
+        <div class="col-sm-8 pt-2">
+          <label for="txt-base-url">{{ trans('nerd.index') }} {{ trans('nerd.url') }}</label>
+          <input id="txt-base-url" type="text" class="form-control" placeholder="Url">
+          <select id="sel-base-url" class="form-control sel-lists sel-url mt-2" size="3" multiple="false">
+            {% for row in crawl.base.urls %}
+              {% if row.uri != empty %}
+                <option value="{{loop.index}}">{{row.uri}}</option>
+              {% endif %}
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-sm-4 pt-4">
+          <button class="btn btn-default btn-sm btn-url-add m-2 btn-url-add" type="button">
+            <span class="fa fa-plus fa-fw fa-lg" aria-hidden="true"></span>
+            {{ trans('nerd.add') }}
+          </button>
+          <br/>
+          <button id="btn-base-url-del" class="btn btn-default btn-sm btn-url-del m-2" type="button">
+            <span class="fa fa-times  fa-fw fa-lg" aria-hidden="true"></span>
+            {{ trans('nerd.del') }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="form-group m-2" data-fg="filter">
+      <div class="row">
+        <div class="col-sm-8">
+          <label for="txt-base-filter">{{ trans('nerd.index') }} {{ trans('nerd.url') }} {{ trans('nerd.filters') }}</label>
+          <input id="txt-base-filter" type="text" class="form-control" placeholder="{{ trans('nerd.add') }} {{ trans('nerd.filters') }}  ">
+          <select id="sel-base-filter" class="form-control sel-lists mt-2" size="3" multiple="multiple[]">
+            {% for row in crawl.base.urls | first.filters %}
+              <option value="{{row}}">{{row}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-sm-4 pt-4">
+          <button id="btn-base-filter-add" class="btn btn-default btn-sm btn-list-add m-2" type="button">
+            <span class="fa fa-plus fa-fw fa-lg" aria-hidden="true"></span>
+            {{ trans('nerd.add') }}
+          </button>
+          <br/>
+          <button id="btn-base-filter-del" class="btn btn-default btn-sm btn-list-del m-2" type="button">
+            <span class="fa fa-times  fa-fw fa-lg" aria-hidden="true"></span>
+            {{ trans('nerd.del') }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="form-group m-2" data-fg="cookie">
+      <div class="row">
+        <div class="col-sm-8">
+          <label for="txt-base-cookie">{{ trans('nerd.index') }} {{ trans('nerd.cookies') }}</label>
+          <input type="text" class="form-control" id="txt-base-cookie" placeholder="{{ trans('nerd.add') }} {{ trans('nerd.index') }} {{ trans('nerd.cookies') }}">
+          <select id="sel-base-cookie" class="form-control sel-lists mt-2" size="3" multiple="multiple[]">
+            {% for row in crawl.base.urls | first.cookies %}
+                <option value="{{row}}">{{row}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-sm-4 pt-4">
+          <button id="btn-base-cookie-add" class="btn btn-default btn-sm btn-list-add m-2" type="button">
+            <span class="fa fa-plus fa-fw fa-lg" aria-hidden="true"></span>
+            {{ trans('nerd.add') }}
+          </button>
+          </br>
+          <button id="btn-base-cookie-del" class="btn btn-default btn-sm btn-list-del m-2" type="button">
+            <span class="fa fa-times fa-fw fa-lg" aria-hidden="true"></span>
+            {{ trans('nerd.del') }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="tab-documents" role="tabpanel" aria-labelledby="lbl-documents" data-bd="documents">
+    <div class="form-group m-2" data-fg="url">
+      <div class="row">
+        <div class="col-sm-8 pt-2">
+          <label for="txt-documents-url">{{ trans('nerd.documents') }} {{ trans('nerd.url') }}</label>
+          <input id="txt-documents-url" type="text" class="form-control" placeholder="Url">
+          <select id="sel-documents-url" class="form-control sel-lists sel-url mt-2" size="3" multiple="false">
+            {% for row in crawl.documents.urls %}
+                {% if row.uri != empty %}
+                  <option value="{{loop.index}}">{{row.uri}}</option>
+                {% endif %}
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-sm-4 pt-4">
+          <button id="btn-documents-url-add" class="btn btn-default btn-sm btn-url-add m-2" type="button">
+            <span class="fa fa-plus fa-fw fa-lg" aria-hidden="true"></span>
+            {{ trans('nerd.add') }}
+          </button>
+          <br/>
+          <button id="btn-documents-url-del" class="btn btn-default btn-sm btn-url-del m-2" type="button">
+            <span class="fa fa-times  fa-fw fa-lg" aria-hidden="true"></span>
+            {{ trans('nerd.del') }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="form-group m-2" data-fg="filter">
+      <div class="row">
+        <div class="col-sm-8">
+          <label for="txt-documents-filter">{{ trans('nerd.documents') }} {{ trans('nerd.url') }} {{ trans('nerd.filters') }}</label>
+          <input type="text" class="form-control" id="txt-documents-filter" placeholder="{{ trans('nerd.add') }} {{ trans('nerd.documents') }} {{ trans('nerd.filters') }}">
+          <select id="sel-documents-filter" class="form-control sel-lists mt-2" size="3" multiple="multiple[]">
+            {% for row in crawl.documents.urls | first.filters %}
+              <option value="{{row}}">{{row}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-sm-4 pt-4">
+          <button id="btn-documents-filter-add" class="btn btn-default btn-sm btn-list-add m-2" type="button">
+            <span class="fa fa-plus  fa-fw fa-lg" aria-hidden="true"></span>
+            {{ trans('nerd.add') }}
+          </button>
+          <br/>
+          <button id="btn-documents-filter-del" class="btn btn-default btn-sm btn-list-del m-2" type="button">
+            <span class="fa fa-times  fa-fw fa-lg" aria-hidden="true"></span>
+            {{ trans('nerd.del') }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="form-group m-2" data-fg="cookie">
+      <div class="row">
+        <div class="col-sm-8">
+          <label for="txt-documents-cookie">{{ trans('nerd.document') }} {{ trans('nerd.cookies') }}</label>
+          <input type="text" class="form-control" id="txt-documents-cookie" placeholder="{{ trans('nerd.add') }} {{ trans('nerd.document') }} {{ trans('nerd.cookies') }}">
+          <select id="sel-documents-cookie" class="form-control sel-lists mt-2" size="3" multiple="multiple[]">
+            {% for row in crawl.documents.urls | first.cookies %}
+              <option value="{{row}}">{{row}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-sm-4 pt-4">
+          <button id="btn-documents-cookie-add" class="btn btn-default btn-sm btn-list-add m-2" type="button">
+            <span class="fa fa-plus fa-fw fa-lg" aria-hidden="true"></span>
+            {{ trans('nerd.add') }}
+          </button>
+          <br/>
+          <button id="btn-documents-cookie-del" class="btn btn-default btn-sm btn-list-del m-2" type="button">
+            <span class="fa fa-times fa-fw fa-lg" aria-hidden="true"></span>
+            {{ trans('nerd.del') }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  var jobCrawl = {{json|raw}}
+</script>

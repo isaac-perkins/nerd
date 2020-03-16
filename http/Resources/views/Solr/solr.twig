@@ -1,0 +1,66 @@
+{% extends 'layout.twig' %}
+
+{% block head %}
+  {{ parent() }}
+  <link href="/assets/css/map.min.css" rel="stylesheet" type="text/css">
+  <script src="https://maps.google.com/maps/api/js?key={{settings.google.maps.key}}"></script>
+{% endblock %}
+
+{% block body %}
+  <div class="container-fluid p-2">
+    <div class="card card-default">
+      <form id="frm-training" name="training">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-2" style="overflow: hidden;">
+              <h4 class="h4 p-2 mb-0">{{ trans('nerd.solr') }} {{ trans('nerd.search') }}</h4>
+            </div>
+            <div class="col-md-10 pt-1">
+              <div class="input-group input-group-sm mt-1">
+                <input type="text" class="form-control" placeholder="{{ trans('nerd.search_query') }}" aria-label="{{ trans('nerd.search_query') }}" aria-describedby="lbl-query">
+                <div class="input-group-append">
+                  <button type="button" id="btn-search" class="btn btn-default">
+                    <span class="fa fa-search" aria-hidden="false"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div id="map" class="map-canvas map-solr page-view"></div>
+          <div id="solr-table" class="page-view d-none">
+            <table class="table"></table>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-md-5">
+              {% block alert %}
+                {% include 'App/alert.twig' %}
+              {% endblock %}
+            </div>
+            <div class="col-md-7 text-right">
+              <button class="btn btn-primary btn-sm mt-2 btn-back" type="button">
+                <span class="fa fa-times  fa-fw fa-lg" aria-hidden="true"></span>
+                {{ trans('nerd.back') }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<input id="solr-url" type="hidden" value="{{settings.solr.url}}">
+<input id="solr-core" type="hidden" value="{{settings.solr.core}}">
+<input id="solr-usr" type="hidden" value="{{settings.solr.usr}}">
+<input id="solr-pwd" type="hidden" value="{{settings.solr.pwd}}">
+<input id="maps-lat" type="hidden" value="{{settings.google.maps.defaults.lat}}">
+<input id="maps-lng" type="hidden" value="{{settings.google.maps.defaults.lng}}">
+{% endblock %}
+
+{% block javascript %}
+  {{ parent() }}
+  <script src="/assets/js/solr{{settings.mode == 'dev' ? '' : '.min'}}.js"></script>
+{% endblock %}

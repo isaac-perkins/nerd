@@ -1,0 +1,33 @@
+<div id="dlg-annotation" class="d-none">
+  <form method="post" action="/jobs">
+      <div class="card card-default">
+        <div class="card-header modal-header">
+          <h5 class="card-title modal-title pl-2">{{trans('nerd.annotate')}}</h5>
+          <button type="button" class="close btn-annotation" data-dismiss="card" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="card-body">
+          <select id="sel-targets" name="menu_targets" title="{{trans('nerd.annotations')}}." class="selectpicker show-tick show-menu-arrow form-control" data-live-search="true" data-add-results="false">
+            {% for row in Annotation %}
+              <option value="{{row.name}}" data-value="{{row.name}}">{{row.title}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="card-footer text-right">
+          <!--<button id="btn-target-report" class="btn btn-default btn-sm" type="button">
+            <span class="fa fa-line-chart fa-fw fa-lg" aria-hidden="true"></span>
+            Report
+          </button>-->
+          <button  type="button" class="btn btn-secondary btn-annotation">
+            <span aria-hidden="true">&times;</span>
+            {{trans('nerd.close')}}
+          </button>
+          <button type="button" id="btn-annotate" class="btn btn-primary">
+            <span class="fa fa-clipboard-check"></span>
+            {{trans('nerd.annotate')}}
+          </button>
+        </div>
+      </div>
+  </form>
+</div>

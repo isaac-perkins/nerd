@@ -1,0 +1,19 @@
+#! /usr/bin/env php
+<?php
+namespace Console;
+
+require_once(__DIR__ . '/../vendor/autoload.php');
+
+include_once(__DIR__ . '/../lib/common.php');
+
+$log = log_job_start('tag', $jobID, $jobDir, $echo);
+
+$cmd = 'java -jar ' . realpath(__DIR__ . '/../../console/nerd.jar') . ' ' . realpath(__DIR__ . '/../../') . ' -content ' . $cmd['job'];
+
+echo PHP_EOL . $cmd . PHP_EOL;
+
+exec($cmd, $out, $rv);
+
+file_put_contents($jobDir . '/tag.log', PHP_EOL . implode("\n", $out));
+
+log_job_end($log, 'tag', $jobID, $echo);

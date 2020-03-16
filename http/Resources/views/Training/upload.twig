@@ -1,0 +1,32 @@
+<div id="mdl-upload" class="modal fade" role="dialog">
+  <form id="upload" method="post" action="training/upload" enctype="multipart/form-data" data-ajax="false">
+    <input type="hidden" id="txt-upload-job" value="{{links.first().id}}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="lbl-header">{{trans('nerd.upload')}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="dz dz-clickable">
+            {{trans('nerd.drop_files_or_click')}}
+             <input type="file" name="newfile">
+          </div>
+          <div class="checkbox">
+            <label class="btn btn-default btn-sm">
+              <input id="chk-new" type="checkbox" checked="checked" data-value="1">
+              <span class="fa fa-plus-square"></span>
+              {{trans('nerd.add_as_new')}}
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('nerd.close')}}</button>
+          <button type="submit" class="btn btn-primary upload">{{trans('nerd.upload')}}</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

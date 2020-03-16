@@ -1,0 +1,13 @@
+
+.map-canvas {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 0;
+}
+
+div.card-body {
+  height: 66vh;
+  margin: 0;
+  padding: 0;
+}

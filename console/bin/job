@@ -1,0 +1,23 @@
+#! /usr/bin/env php
+<?php
+namespace Console;
+
+use Nerd\Model\Log;
+use Nerd\Model\Command;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+include_once(__DIR__ . '/../lib/common.php');
+
+op('crawl');
+op('tag');
+op('result');
+
+function op(String $action)
+{
+  global $jobID;
+
+  exec(realpath(__DIR__) . "/$action -j $jobID  & echo $!;", $out, $rv);
+
+  Log::start(1, $jobID, $action, "/$action -j $jobID", $out, $rv);
+}

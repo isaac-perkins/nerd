@@ -1,0 +1,58 @@
+{% extends 'layout.twig' %}
+{% block head %}
+  {{ parent() }}
+  <link href="/assets/css/vendor/codemirror.css" rel="stylesheet">
+{% endblock %}
+{% block body %}
+  <div class="container p-2">
+    <form method="post" action="/config">
+      <div class="card card-default">
+        <div class="card-header">
+          <h4 class="p-2 mb-0">{{ trans('nerd.config') }}</h4>
+        </div>
+        <div class="card-body">
+          <textarea id="txt-content" name="content" class="form-control">{{ config }}</textarea>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-lg-6 col-md-8 col-sm-8">
+              {% block alert %}
+                {% include 'App/alert.twig' %}
+              {% endblock %}
+            </div>
+            <div class="col-lg-6 col-md-8 col-sm-4 text-right">
+              <button id="btn-back" class="btn btn-default btn-sm btn-back" type="button">
+                <span class="fa fa-times fa-fw fa-lg" aria-hidden="true"></span>
+                {{ trans('nerd.back') }}
+              </button>
+              <button id="btn-edit-job" type="submit" class="btn btn-primary btn-sm">
+                <span class="fa fa-save fa-fw fa-lg" aria-hidden="true"></span>
+                {{ trans('nerd.save') }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  {% endblock %}
+  {% block javascript %}
+    {{ parent() }}
+    <script src="/assets/js/vendor/codemirror.js"></script>
+    <script src="/assets/js/vendor/php.js"></script>
+    <script src="/assets/js/vendor/htmlmixed.js"></script>
+    <script src="/assets/js/vendor/xml.js"></script>
+    <script src="/assets/js/vendor/javascript.js"></script>
+    <script src="/assets/js/vendor/css.js"></script>
+    <script src="/assets/js/vendor/clike.js"></script>
+    <script>
+      var cm = CodeMirror.fromTextArea(document.getElementById("txt-content"), {
+        lineNumbers: false,
+        lineWrapping: false,
+        styleActiveLine: true,
+        matchBrackets: false,
+        mode: "text/x-php"
+      });
+
+      cm.setSize('100%', '100%');
+    </script>
+  {% endblock %}

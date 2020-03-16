@@ -1,0 +1,15 @@
+#! /usr/bin/env php
+<?php
+namespace Console;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+include_once(__DIR__ . '/../lib/common.php');
+
+$log = log_job_start('result', $jobID, $jobDir, $echo);
+
+$r = new Model\Results($job, $log);
+
+$r->process();
+
+log_job_end($log, 'result', $jobID, $echo);

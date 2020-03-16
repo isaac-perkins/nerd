@@ -1,0 +1,47 @@
+<div id="mdl-annotation-add" class="modal" tabindex="-1" role="dialog">
+  <form method="put" action="/annotations" data-callback="responseAdd">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ trans('nerd.new') }} {{ trans('nerd.annotation') }}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="title">{{ trans('nerd.annotation') }}</label>
+            <input type="text" class="form-control" name="title" placeholder="Annotation">
+          </div>
+          <div class="form-group">
+            <label for="type">{{ trans('nerd.data') }} {{ trans('nerd.type') }}</label>
+            <select class="form-control selectpicker" name="type">
+              <option value="1" selected="selected">Text</option>
+              <option value="2">Number</option>
+              <option value="3">Date</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="order">{{ trans('nerd.order') }}</label>
+            <input type="text" class="form-control" name="order" placeholder="Order">
+          </div>
+          <label class="btn btn-default btn-sm">
+            <input type="checkbox" name="multi" checked="checked">
+            <span class="fa fa-ok"></span>
+            {{ trans('nerd.multi') }} {{ trans('nerd.per_item') }}.
+          </label>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+             {{ trans('nerd.close') }}
+          </button>
+          <button type="submit" class="btn btn-primary">
+            <span class="fa fa-save" aria-hidden="true"></span>
+             {{ trans('nerd.add') }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

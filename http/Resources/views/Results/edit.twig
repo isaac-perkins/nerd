@@ -1,0 +1,33 @@
+<div id="mdl-edit" class="modal" role="dialog">
+  <form method="post" action="/jobs/{{job_id}}/results" data-callback="responseEdit">
+    <input type="hidden" class="txt-item_id" name="item_id">
+    <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title">{{ trans('nerd.result_edit') }}</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <div class="modal-body">
+         {% for value in results.data %}
+           {% if loop.first %}
+             {% for key in value|keys %}
+              {% if not loop.first %}
+               <div class="form-group">
+                 <label for="name">{{key|replace({'_': " "})}}</label>
+                 <input type="text" class="form-control txt-{{key}}" name="{{key|lower}}" placeholder="{{key|replace({'_': " "})}}" autocomplete="off">
+               </div>
+              {% endif %}
+             {% endfor %}
+           {% endif %}
+          {% endfor %}
+       </div>
+       <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('nerd.close') }}</button>
+        <button type="submit" class="btn btn-primary">{{ trans('nerd.edit') }}</button>
+       </div>
+    </div>
+  </div>
+ </form>
+</div>

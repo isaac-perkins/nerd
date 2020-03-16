@@ -1,0 +1,70 @@
+
+// Import Custom nerd Variables (Overrides Default Bootstrap Variables)
+@import "variables.scss";
+
+// Import Bootstrap
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+// Import Custom nerd Mixins and Components
+@import "mixins.scss";
+@import "global.scss";
+@import "utilities.scss";
+
+// Custom Components
+@import "dropdowns.scss";
+@import "navs.scss";
+@import "buttons.scss";
+@import "cards.scss";
+@import "charts.scss";
+@import "login.scss";
+@import "error.scss";
+@import "footer.scss";
+
+th {
+  text-transform: capitalize;
+}
+
+div.alert {
+  padding: 10px 0 5px 15px;
+  margin-bottom: 0;
+}
+
+button.btn.dropdown-toggle-split {
+  min-width: 15px;
+}
+
+a.nav-link.nav-solr {
+  background: url(/assets/img/ico-solr-red.png) no-repeat left;
+  margin-left: 15px;
+
+}
+
+.bootstrap-select .filter-option-inner-inner, .bootstrap-select .dropdown-item {
+  color: rgb(110, 112, 126);
+}
+
+a.nav-link.nav-solr span {
+  padding-left: 10px;
+}
+
+ul.navbar-nav.toggled a.nav-link.nav-solr {
+  background: url(/assets/img/ico-solr-red.png) no-repeat center;
+  margin-left: 0;
+}
+
+ul.navbar-nav.toggled a.nav-link.nav-solr span {
+  padding-left: 0;
+}
+
+
+div.card-header {
+  padding-left: 0;
+}
+
+div.CodeMirror {
+  z-index: 0;
+}
+
+div.card-footer {
+  padding-left: 5px;
+}

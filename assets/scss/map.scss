@@ -1,0 +1,18 @@
+
+.map-canvas {
+  width: 1350px;
+  height: 715px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.map-canvas.map-solr {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 0;
+}
+div.panel-map {
+  margin: 0;
+  padding: 0;
+}

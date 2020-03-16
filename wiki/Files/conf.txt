@@ -1,0 +1,19 @@
+<VirtualHost *:443>
+
+    ServerAdmin admin@local
+
+    ServerName nerd.local
+
+    DocumentRoot /var/www/sites/nerd/public
+
+    <Directory "/var/www/sites/nerd/public">
+        AllowOverride None
+        Order allow,deny
+        Allow from all
+        RewriteEngine On
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteRule ^ index.php [QSA,L]
+    </Directory>
+
+</VirtualHost>

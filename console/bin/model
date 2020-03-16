@@ -1,0 +1,77 @@
+#! /usr/bin/env php
+<?php
+namespace Console;
+
+require_once(__DIR__ . '/../vendor/autoload.php');
+
+include_once(__DIR__ . '/../lib/common.php');
+
+$log = log_job_start('model', $jobID, $jobDir, $echo);
+
+$jobTrn = $jobDir . '/job.trn';
+
+$rv = 0;
+
+if(file_exists($jobTrn)) {
+
+    unlink($jobTrn);
+
+}
+
+if(file_exists($jobDir . "/model.bin")) {
+
+    unlink($jobDir . "/model.bin");
+
+}
+
+$out = fopen($jobTrn, "w");
+
+foreach(glob("$jobDir/training/*") as $trn) {
+
+    $in = fopen($trn, "r");
+
+    while ($line = fgets($in)){
+
+      fwrite($out, $line);
+
+    }
+
+    fwrite($out, "\n");
+
+    fclose($in);
+}
+
+fclose($out);
+
+//echo PHP_EOL . $settings['opennlp']['path'] . PHP_EOL;
+
+$cmd = $settings['opennlp']['path'] . "opennlp TokenNameFinderTrainer -model " . $jobDir . "/model.bin -data " .  $jobDir . "/job.trn -lang en  2>&1";
+//echo PHP_EOL . $cmd . PHP_EOL;
+//exit;
+try {
+
+  exec ($cmd, $out, $rv);
+
+  if (!$rv == 0) {
+    echo PHP_EOL  . "ERROR:" .  PHP_EOL . implode("\n", $out) . PHP_EOL;
+  }
+
+  if ($echo == true) {
+    echo PHP_EOL . implode("\n", $out);
+  }
+
+} catch(\Exception $e) {
+
+  if ($echo == true) {
+    echo PHP_EOL . "ERROR in files: " . realpath($jobTrn);
+    echo PHP_EOL . "error- " . $e->getMessage();
+  }
+
+  $log->error('Error: ' . $e->getMessage());
+}
+
+file_put_contents($jobDir . '/model.log', implode("\n", $out));
+
+log_job_end($log, 'model', $jobID, $echo);
+
+exit($rv);

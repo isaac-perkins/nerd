@@ -1,0 +1,31 @@
+{
+  "authentication":{
+    "class":"solr.BasicAuthPlugin",
+    "blockUnknown":true,
+    "credentials":{
+      "solr":"L5zx5X2MLdx2x+We9G2UXNu61V0WdoLXQvnrKhYyplA= cO2olKPBMBz7QOnUHsIxtIZ+qC3KlpCYqyJHUyW/Np4="
+    },
+    "":{"v":0}},
+  "authorization":{
+    "class":"solr.RuleBasedAuthorizationPlugin",
+    "permissions":[
+      {
+        "name":"all",
+        "role":"admin",
+        "index":1},
+      {
+        "name":"read",
+        "role":"users",
+        "index":2},
+      {
+        "name":"update",
+        "role":"managers",
+        "index":3}],
+    "user-role":{
+      "solr":[
+        "managers",
+        "users",
+        "admin"
+      ]
+    },
+    "":{"v":0}}}

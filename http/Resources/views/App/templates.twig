@@ -1,0 +1,58 @@
+{% extends 'layout.twig' %}
+{% block head %}
+  {{ parent() }}
+{% endblock %}
+{% block body %}
+  <div class="container p-2">
+    <div class="card card-default">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-6">
+            <h1 class="h4 p-2 mb-0">{{ trans('nerd.manage') }}
+              {{ trans('nerd.templates') }}</h1>
+          </div>
+          <div class="col-lg text-right"></div>
+        </div>
+      </div>
+      <div class="card-body p-0">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>{{ trans('name') }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in templates %}
+              <tr>
+                <td>
+                  <a href="/templates/{{row.name}}">{{ row.title }}
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-md-7">
+              {% block alert %}
+                {% include 'App/alert.twig' %}
+              {% endblock %}
+            </div>
+            <div class="col-md-5 text-right">
+              <div class="btn-group">
+                <button type="button" class="btn btn-primary btn-sm btn-back">
+                  <span class="fa fa-times sfa-fw fa-lg" aria-hidden="true"></span>
+                  {{ trans('nerd.back') }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+{% endblock %}
+{% block javascript %}
+  {{ parent() }}
+{% endblock %}

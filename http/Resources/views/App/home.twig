@@ -1,0 +1,13 @@
+{% extends 'layout.twig' %}
+{% block head %}
+  {{ parent() }}
+  <script src='https://www.google.com/recaptcha/api.js'></script>
+{% endblock %}
+{% block body %}
+  {% if not auth.check() %}
+    {% include 'Auth/recaptcha.twig' %}
+  {% endif %}
+{% endblock %}
+{% block javascript %}
+  {{ parent() }}
+{% endblock %}

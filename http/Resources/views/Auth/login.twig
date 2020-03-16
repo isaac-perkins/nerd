@@ -1,0 +1,42 @@
+{% extends 'layout.twig' %}
+
+{% block head %}
+  {{ parent() }}
+{% endblock %}
+
+{% block body %}
+  <div class="home">
+    <div class="row">
+      <div class="offset-md-4 col-sm-4 mt-4">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-0">
+            <div class="row">
+              <div class="col-lg">
+                <div class="p-5">
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">{{ trans('nerd.welcome_back') }}</h1>
+                  </div>
+                  <form method="post" action="/login" data-href="/jobs/list">
+                    {{ csrf() }}
+                    <div class="form-group">
+                      <input type="text" name="username" class="form-control form-control-user" placeholder="Enter User Name...">
+                    </div>
+                    <div class="form-group">
+                      <input type="password" name="password" class="form-control form-control-user" placeholder="Password">
+                    </div>
+                    <button type="submit"  class="btn btn-primary btn-user btn-block">
+                      Login
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% block alert %}
+          {% include 'App/alert.twig' %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

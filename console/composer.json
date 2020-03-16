@@ -1,0 +1,44 @@
+{
+    "name": "zak/nerd-console",
+    "description": "Nerd Console",
+    "keywords": [""],
+    "homepage": "https://nerd.preset.cloud/",
+    "license": "CC",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "authors": [
+        {
+            "name": "Sniper",
+            "email": "sniper@openmail.cc"
+        }
+    ],
+
+    "repositories": [
+      {
+        "type": "vcs",
+        "url": "https://github.com/Webanet-Australia/xsldom"
+      }
+    ],
+
+    "require": {
+      "nategood/commando": "*",
+      "monolog/monolog": "^1.17",
+      "spatie/crawler": "^3.2",
+      "illuminate/database": "^5.3",
+      "xsldom/xsldomdocument": "dev-master",
+      "myclabs/php-enum": "^1.5",
+      "alexpechkarev/google-geocoder": "dev-master"
+    },
+
+    "require-dev": {
+      "phpunit/phpunit": "5.4.*"
+    },
+
+    "autoload": {
+         "psr-4": {
+           "Console\\": "./",
+            "Nerd\\" : "../http"
+         }
+    }
+
+}

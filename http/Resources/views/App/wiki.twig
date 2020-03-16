@@ -1,0 +1,30 @@
+{% extends 'layout.twig' %}
+{% block head %}
+  {{ parent() }}
+  <link href="/css/nerd.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+  <div class="container-fluid" style="overflow: hidden">
+    <div class="row">
+      <div class="col-lg mt-4 mr-2" style="height: 140vh; overflow:hidden">
+        <iframe id="ifr-wiki" title="Wiki" width="100%" height="100%" src="/Wikitten/" style="border:none; overflow: hidden" ></iframe>
+      </div>
+    </div>
+    {% if is_writable == 1 %}
+      <div class="col-lg mt-4 p-0" style="height: 60vh; overflow:hidden">
+        <iframe id="file-manager" title="File Manager" width="100%" height="100%" src="/Wikitten/files/" style="border:none"></iframe>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}
+
+{% block javascript %}
+  {{ parent() }}
+  <script src="/assets/js/vendor/dropzone.min.js"></script>
+  <script>
+    $(window).on('load', function() {
+      selectNavItem('wiki');
+    });
+  </script>
+{% endblock %}

@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="offset-md-4 col-sm-4 mt-4">
+    <form id="recaptcha" method="get" action="/login" data-redirect="/login">
+      {{ csrf() }}
+      <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-header text-center">
+            <h1 class="h4 text-gray-900 mt-1 mb-0 py-2">Robot</h1>
+        </div>
+        <div class="card-body text-center">
+          <div class="form-group d-flex justify-content-center mt-4">
+            <div class="g-recaptcha" data-sitekey="{{ settings.google.recaptcha.key }}"></div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="button" id="login" class="btn btn-primary btn-block sign" href="{{ path_for('login') }}">
+            Sign In
+          </a>
+        </div>
+      </div>
+      {% if has_errors() %}
+        <div class="alert alert-danger message mt-3 text-center">
+          {% for paramErrors in errors() %}
+            {% for error in paramErrors %}
+              <p class="pt-4">{{ error }}</p>
+            {% endfor %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </form>
+  </div>
+</div>
+<script>
+$(function () {
+
+  $('#login').click(function(e) {
+     e.preventDefault();
+     document.location =  '/login/' + '?' + $('#recaptcha').serialize();
+  });
+
+});
+</script>

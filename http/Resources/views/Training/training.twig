@@ -1,0 +1,137 @@
+{% extends 'layout.twig' %}
+
+{% block head %}
+  {{ parent() }}
+  <link href="/assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="/assets/css/vendor/bootstrap-select.min.css" rel="stylesheet">
+  <link href="/assets/css/training.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+  <div class="container-fluid p-2">
+    <div class="card card-default">
+      <form id="frm-training" action="/jobs/{{job_id}}/training?t={{links.first().id}}" method="post" data-callback="responseSave">
+        <input type="hidden" id="txt-job" value="{{ job_id }}">
+        <input type="hidden" id="txt-training" value="{{links.first().id}}">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-4" style="overflow: hidden;">
+              <h4 class="h4 p-2 mb-0">{{ job_title }}</h4>
+            </div>
+            <div class="col-md-6 pr-0">
+              <select id="sel-training" name="links" class="selectpicker form-control">
+                {% for row in links %}
+                  <option value="{{row.id}}">{{row.url}}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-md-2 text-right pt-2 pl-1 pr-2">
+              <div class="btn-group toolbar">
+                <button type="button" class="btn btn-default btn-sm" title="New" data-toggle="modal" data-target="#mdl-add">
+                  <span class="fa fa-plus-square fa-fw fa-lg"></span>
+                </button>
+                <button id="btn-download" type="button" class="btn btn-default btn-sm" title="Download" data-toggle="context" data-target="#context-menu">
+                  <span class="fa fa-download fa-fw fa-lg" aria-hidden="false"></span>
+                </button>
+                <button id="btn-upload" type="button" class="btn btn-default btn-sm" title="Upload" data-toggle="modal" data-target="#mdl-upload">
+                  <span class="fa fa-file-upload fa-fw fa-lg" aria-hidden="false"></span>
+                </button>
+                <button type="button" class="btn btn-default btn-sm" title="Delete" data-toggle="modal" data-target="#mdl-remove">
+                  <span class="fa fa-trash fa-fw fa-lg" aria-hidden="false"></span>
+                </button>
+                <button type="button" class="btn btn-default btn-sm btn-annotation" title="Annotations">
+                  <span class="fa fa-bullseye fa-fw fa-lg" aria-hidden="false"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body p-0" style="height: 67vh">
+          <textarea id="txt-content" name="content" class="form-control" >{{ content | raw }}</textarea>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-md-5">
+              {% block alert %}
+                {% include 'App/alert.twig' %}
+              {% endblock %}
+            </div>
+            <div class="col-md-7 text-right">
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default btn-sm btn-build" data-action="crawl">
+                  <span class="fas fa-globe-americas fa-fw fa-lg"></span>
+                  {{ trans('nerd.crawl') }}
+                </button>
+                <button type="button" class="btn btn-default btn-sm btn-build" data-action="model">
+                  <span class="fa fa-cubes fa-fw fa-lg" aria-hidden="true"></span>
+                  {{ trans('nerd.build') }}
+                </button>
+                <button type="button" class="btn btn-default btn-sm btn-build" data-action="tag">
+                  <span class="fas fa-tag fa-fw fa-lg"></span>
+                  {{ trans('nerd.tag') }}
+                </button>
+                <button type="button" class="btn btn-default btn-sm btn-build" data-action="result">
+                  <span class="fa fa-table fa-fw fa-lg"></span>
+                  {{ trans('nerd.results') }}
+                </button>
+              </span>
+              <span class="input-group-btn">
+                <a href="/jobs/{{job_id}}" class="btn btn-default btn-sm">
+                  <span class="fa fa-puzzle-piece fa-fw fa-lg" aria-hidden="false"></span>
+                  {{ trans('nerd.job') }}
+                </a>
+                <div class="btn-group dropup">
+                  <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="fa fa-file-invoice " area-hidden="false"></span>
+                    {{ trans('nerd.log') }}
+                  </button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="log/?log=crawl">
+                      <span class="fas fa-globe-americas"></span>
+                      {{ trans('nerd.crawl') }}
+                    </a>
+                    <a class="dropdown-item" href="log/?log=model">
+                      <span class="fa fa-cubes fa-fw fa-lg" aria-hidden="true"></span>
+                      {{ trans('nerd.build') }}
+                    </a>
+                    <a class="dropdown-item" href="log/?log=tag">
+                      <span class="fas fa-tag  fa-fw fa-lg"></span>
+                      {{ trans('nerd.tag') }}
+                    </a>
+                    <a class="dropdown-item" href="log/?log=tag">
+                      <span class="fa fa-table fa-fw fa-lg"></span>
+                      {{ trans('nerd.results') }}
+                    </a>
+                  </div>
+                </div>
+                <button class="btn btn-primary sm" type="submit">
+                  <i class="far fa-save"></i>
+                  {{ trans('nerd.save') }}
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="dropdown-menu dropdown-menu-sm" id="context-menu">
+    {% for row in Annotation %}
+      <a class="dropdown-item" data-name="{{ row.name }}" href="#">{{ row.title }}</a>
+    {% endfor %}
+  </div>
+  {% include 'Training/add.twig' %}
+  {% include 'Training/remove.twig' %}
+  {% include 'Training/upload.twig' %}
+  {% include 'Annotation/dialog.twig' %}
+{% endblock %}
+
+{% block javascript %}
+  {{ parent() }}
+  <script src="/assets/js/vendor/bootstrap-select.min.js"></script>
+  <script src="/assets/js/vendor/interact.min.js"></script>
+  <script src="/assets/js/vendor/codemirror.js"></script>
+  <script src="/assets/js/vendor/xml.js"></script>
+  <script src="/assets/js/training{{settings.mode == 'dev' ? '' : '.min'}}.js"></script>
+
+{% endblock %}

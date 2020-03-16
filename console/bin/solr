@@ -1,0 +1,65 @@
+#! /usr/bin/env php
+<?php
+namespace Console;
+
+use Commando\Command as Command;
+use Symfony\Component\Yaml\Yaml;
+use Monolog\Logger as Logger;
+use Monolog\Handler\StreamHandler;
+use Illuminate\Database\Capsule\Manager;
+use Nerd\Model\Commands;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$importPath = realpath(__DIR__ . '/../../cache/import');
+
+$cmd = new Command();
+
+
+
+
+
+// Action
+$cmd->option('a')
+  ->aka('action')
+  ->require(true)
+  ->describedAs('Action to perform. One of [import, ]')
+  ->must(function($action) {
+      return in_array($action, ['import']);
+  });
+
+//File
+$cmd->option('f')
+  ->aka('file')
+  ->describedAs('File path and name to import/export')
+  ->require(true)
+  ->must(function($file) use ($importPath) {
+      return file_exists($importPath . '/' . $file);
+  });
+
+//Silent
+$cmd->option('s')
+  ->aka('silent')
+  ->describedAs('Echo process messages to shell window.')
+  ->require(false)
+  ->default(false)
+  ->boolean();
+
+$echo = false;
+if (!$cmd['silent']) {
+  $echo = true;
+}
+
+if ($echo == true) {
+  echo PHP_EOL . 'Starting import';
+}
+
+$solr = new Model\Solr($importPath . '/' . $cmd['file'], $echo);
+
+$action = $cmd['action'];
+
+try {
+  $solr->$action();
+} catch (\Exception $e) {
+  echo PHP_EOL . $e->getMessage();
+}
