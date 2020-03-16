@@ -1,18 +1,17 @@
 {
-    "name": "zak/nerd",
-    "description": "nerd",
-    "keywords": ["Named Entity Recognition"],
-    "homepage": "http://nerd.webanet.com.au/",
-    "license": "CC BY-NC-ND",
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+    "name": "webanet-au/nerd",
+    "description": "Named Entity Recognition Dashboard",
+    "keywords": ["Named Entity Recognition Dashboard"],
+    "homepage": "https://github.com/webanet-au/nerd",
+    "license": "MIT",
     "authors": [
         {
             "name": "zak",
             "email": "zak@webanet.com.au"
         }
     ],
-
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
       "php": "^7.1",
       "ext-date": "*",

@@ -13,8 +13,8 @@ The `NERD` dashboard is used for training [Apache OpenNLP](https://opennlp.apach
 
 ![Screenshot](https://raw.githubusercontent.com/webanet-au/nerd/master/screenshot.jpg)
 
-## Support
-A beta version and demo coming soon.
+## Status / Support
+Beta and demo coming soon.
 [Github Issues Tracking](https://github.com/webanet-au/nerd/issues) | [Trello](https://trello.com/b/UgDofsbl/nerd) | [Email](zak@webanet.com.au)
 
 
@@ -80,14 +80,14 @@ nano bootstrap/settings.php
 
 #### Settings
 
-Edit (settings)[bootstrap/settings.php], required for full operation.
+Edit [settings](https://github.com/webanet-au/nerd/blob/master/wiki/en_US/1.Setup/1.Nerd.md) for full operation.
 
-See [Wiki settings](https://github.com/webanet-au/nerd/blob/master/wiki/en_US/1.%20Setup/1.%20Nerd.md)
+Settings [file](https://github.com/webanet-au/nerd/blob/master/bootstrap/settings.php.dist).
 
 
 ## Internationalization
 
-Languages can be [added]('https://github.com/webanet-au/nerd/blob/master/wiki/en_US/1.%20Setup/1.%20Nerd.md').
+Languages can be [added]('https://github.com/webanet-au/nerd/blob/master/wiki/en_US/1.Setup/1.Nerd.md').
 
 ## Contributing
 Please! Contributions are very welcome. Submit pull request.
