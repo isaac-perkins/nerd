@@ -1,0 +1,48 @@
+{
+  "title": "nerd",
+  "name": "nerd",
+  "version": "16",
+  "scripts": {},
+  "description": "Named entity recognition dashboard.",
+  "keywords": [],
+  "homepage": "https://nerd.webanet.com.au",
+  "bugs": {
+    "url": "https://trello.com/b/UgDofsbl/nerd",
+    "email": "zak@webanet.com.au"
+  },
+  "license": "CC-BY-NC-ND-2.5",
+  "author": "zak@webanet.com.au",
+  "contributors": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Boulevard-Software/n.e.r.d"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^3.0.0",
+    "gulp-util": "^3.0.8",
+    "pump": "^1.0.3"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "5.7.2",
+    "bootstrap": "4.3.1",
+    "bootstrap-contextmenu": "^1.0.0",
+    "bootstrap-cron-picker": "1.0.0",
+    "bootstrap-select": "^1.13.2",
+    "bootstrap4-dialog": "^4.1.0",
+    "clipboard": "^2.0.4",
+    "codemirror": "^5.44.0",
+    "dropzone": "^5.5.1",
+    "interactjs": "^1.3.4",
+    "jQuery-QueryBuilder": "^2.5.2",
+    "jquery": "^3.3.1",
+    "jquery-autocomplete": "^1.2.8",
+    "jquery-contextmenu": "^2.8.0",
+    "jquery.easing": "^1.4.1",
+    "js-cookie": "^2.2.0",
+    "popper.js": "^1.14.7"
+  }
+}
