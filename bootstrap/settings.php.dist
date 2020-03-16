@@ -13,10 +13,10 @@ return [
     'invite' => '99e914bc-6d59-AG78-238c-2462ss1e6bce',
 
     //i18N
-    'locale' => 'en',
+    'locale' => 'en_US',
 
     // Source Code Repository
-    'repo' => 'https://github.com/Boulevard-Software/n.e.r.d',
+    'repo' => 'https://github.com/webanet-au/nerd',
 
     /* Twig settings */
     'view' => [
