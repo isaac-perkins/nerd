@@ -1,0 +1,32 @@
+{
+  "title": "Job Process ID",
+  "description": "Job row mulit on, seperated by ID tag.",
+  "multi": "on",
+  "row-seperator": "expression",
+  "seperator-text": "",
+  "base": {
+    "urls": [
+      {
+        "uri": "",
+        "filters": [],
+        "cookies": []
+      },
+      {
+        "uri": "http://nerd.local/test/data/pages/",
+        "filters": [],
+        "cookies": []
+      }
+    ]
+  },
+  "documents": {
+    "urls": [
+      {
+        "uri": "http://nerd.local/test/data/pages/",
+        "filters": [
+          ".txt"
+        ],
+        "cookies": []
+      }
+    ]
+  }
+}

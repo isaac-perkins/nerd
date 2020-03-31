@@ -1,32 +1,27 @@
 <?php declare(strict_types=1);
 /*
- * This file is part of Nerd (Named Entity Recognition Dashboard).
- *
- * (c) Boulevard Software (hello@blvd.ai)
+ * This file is part of nerd (Named Entity Recognition Dashboard).
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
 namespace Nerd\Test;
-
-//use Illuminate\Database\Capsule\Manager;
-use Nerd\Model\Command;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Yaml\Yaml;
+use Nerd\Model\Command;
 
-$parameters = Yaml::parse(\file_get_contents(__DIR__ . '/../../bootstrap/parameters.yml'))['parameters'];
+require __DIR__ . '/../../vendor/autoload.php';
 
-$capsule = new Manager();
-$capsule->addConnection($parameters);
-$capsule->setAsGlobal();
-$capsule->bootEloquent();
+require __DIR__ . '/../../bootstrap/capsule.php';
 
+/**
+ * @covers Nerd\Model\Command
+*/
 class CommandsTest extends TestCase
 {
     public function testProcess(): void
     {
-        print_r(Command::process(106, 'crawl', 242));
+        \print_r(Command::process(106, 'crawl', 242));
 
         //$this->assertInternalType('int', $rv['jobID']);
 
