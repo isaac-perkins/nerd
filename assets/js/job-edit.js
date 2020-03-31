@@ -19,8 +19,12 @@ $(function () {
   var selectedUrl = 0;
 
   $(document).ready(function () {
-    selectNavItem('jobs');
+    //selectNavItem('jobs');
   });
+
+  $('.use-text').on('click', function () {
+    $('#txt-multiple-item').toggleClass('d-none');
+  })
 
   $('input[type="checkbox"]').on('click', function () {
     var dt = '#' + $(this).attr('data-text');
